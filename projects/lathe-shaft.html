@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lathe Turned Shaft | Project</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<a class="hero-button" href="../index.html#projects">
+← Back to Projects
+</a>
+
+<nav>
+
+<a href="../index.html#about">About</a>
+<a href="../index.html#skills">Skills</a>
+<a href="../index.html#projects">Projects</a>
+<a href="../index.html#contact">Contact</a>
+
+</nav>
+
+<section>
+
+<header class="project-hero">
+
+<h1>Lathe Turned Shaft</h1>
+
+<p>Machining Project | Centre Lathe | Precision Measurement</p>
+
+</header>
+
+<div class="tabs">
+
+<button class="tab-button active" onclick="openTab(event, 'overview')">
+Overview
+</button>
+
+<button class="tab-button" onclick="openTab(event, 'gallery')">
+Gallery
+</button>
+
+<button class="tab-button" onclick="openTab(event, 'documents')">
+Documents
+</button>
+
+</div>
+
+<!-- OVERVIEW TAB -->
+<div id="overview" class="tab-content active">
+
+<h2>Overview</h2>
+
+<p>
+This project involved manufacturing a stepped shaft using a centre lathe.
+The work included facing, turning, and dimensional inspection.
+</p>
+
+<div class="project-specifications">
+
+<h3>Project Specifications</h3>
+
+<div class="spec-grid">
+
+<div class="spec-item">
+<span class="spec-title">Machine</span>
+<span class="spec-value">Centre Lathe</span>
+</div>
+
+<div class="spec-item">
+<span class="spec-title">Material</span>
+<span class="spec-value">Mild Steel</span>
+</div>
+
+<div class="spec-item">
+<span class="spec-title">Chuck Type</span>
+<span class="spec-value">3 Jaw Chuck</span>
+</div>
+
+<div class="spec-item">
+<span class="spec-title">Operations</span>
+<span class="spec-value">Facing, Turning, Measurement</span>
+</div>
+
+</div>
+
+</div>
+
+<h3>Manufacturing Process</h3>
+
+<ol class="process-list">
+
+<li>Facing the end of the raw stock to create a flat datum surface.</li>
+
+<li>Rough turning the shaft diameter to remove excess material.</li>
+
+<li>Step turning to achieve the required diameters.</li>
+
+<li>Measuring with vernier calipers to ensure dimensional accuracy.</li>
+
+<li>Final finishing pass to improve surface finish.</li>
+
+</ol>
+
+<div class="drawing-section">
+
+<h3>Engineering Drawing</h3>
+
+<img src="../images/shaft-drawing.jpg"
+alt="Lathe shaft engineering drawing"
+class="drawing-image">
+
+</div>
+
+</div>
+
+
+<!-- GALLERY TAB -->
+<div id="gallery" class="tab-content">
+
+<h2>Gallery</h2>
+
+<div class="gallery-grid">
+<img src="../images/Shaft1.jpg" class="gallery-img">
+<img src="../images/Shaft2.jpg" class="gallery-img">
+<img src="../images/Shaft3.jpg" class="gallery-img">
+<img src="../images/Shaft4.jpg" class="gallery-img">
+</div>
+
+</div>
+
+
+<!-- DOCUMENTS TAB -->
+<div id="documents" class="tab-content">
+
+<a class="hero-button"
+href="../reports/lathe-shaft-report.pdf"
+download>
+
+Download Job Report (PDF)
+
+</a>
+
+</div>
+
+</section>
+
+<script>
+let currentImageIndex = 0;
+let galleryImages = [];
+
+window.addEventListener('DOMContentLoaded', () => {
+
+galleryImages = Array.from(document.querySelectorAll('#gallery .gallery-img'));
+
+galleryImages.forEach((img, index) => {
+img.addEventListener('click', () => openLightbox(index));
+});
+
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-prev').addEventListener('click', () => changeLightbox(-1));
+document.getElementById('lightbox-next').addEventListener('click', () => changeLightbox(1));
+
+});
+
+function openLightbox(index){
+
+currentImageIndex = index;
+
+document.getElementById('lightbox-img').src =
+galleryImages[currentImageIndex].src;
+
+document.getElementById('lightbox').style.display = 'flex';
+
+}
+
+function closeLightbox(){
+
+document.getElementById('lightbox').style.display = 'none';
+
+}
+
+function changeLightbox(direction){
+
+currentImageIndex += direction;
+
+if(currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+if(currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+
+document.getElementById('lightbox-img').src =
+galleryImages[currentImageIndex].src;
+
+}
+
+document.addEventListener('keydown', function(e) {
+
+const lightbox = document.getElementById('lightbox');
+
+if (lightbox.style.display === 'flex') {
+
+if (e.key === 'ArrowLeft') {
+changeLightbox(-1);
+}
+
+else if (e.key === 'ArrowRight') {
+changeLightbox(1);
+}
+
+else if (e.key === 'Escape') {
+closeLightbox();
+}
+
+}
+
+});
+</script>
+
+<script>
+
+function openTab(evt, tabName){
+
+let tabs = document.getElementsByClassName("tab-content");
+let buttons = document.getElementsByClassName("tab-button");
+
+for(let i=0;i<tabs.length;i++){
+tabs[i].classList.remove("active");
+}
+
+for(let i=0;i<buttons.length;i++){
+buttons[i].classList.remove("active");
+}
+
+document.getElementById(tabName).classList.add("active");
+evt.currentTarget.classList.add("active");
+
+}
+
+</script>
+
+<div id="lightbox" class="lightbox">
+<span class="lightbox-close" id="lightbox-close">×</span>
+<img id="lightbox-img">
+<span class="lightbox-prev" id="lightbox-prev">&#10094;</span>
+<span class="lightbox-next" id="lightbox-next">&#10095;</span>
+</div>
+
+<div class="project-nav">
+
+<a class="project-nav-button prev" href="previous-project.html">
+← Previous Project
+</a>
+
+<a class="project-nav-button next" href="next-project.html">
+Next Project →
+</a>
+
+</div>
+
+</body>
+</html>
