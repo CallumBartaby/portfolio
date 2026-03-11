@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Drill, Tap & Gauge Block | Project</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<a class="hero-button" href="../index.html#projects">
+← Back to Projects
+</a>
+
+<nav>
+
+<a href="../index.html#about">About</a>
+<a href="../index.html#skills">Skills</a>
+<a href="../index.html#projects">Projects</a>
+<a href="../index.html#contact">Contact</a>
+
+</nav>
+
+<section>
+
+<header class="project-hero">
+  <h1>Drill, Tap & Gauge Block</h1>
+  <p>Machining Project | Drilling | Tapping | Thread Inspection</p>
+</header>
+
+<!-- Tabs Menu -->
+<div class="tabs">
+  <button class="tab-button active" onclick="openTab(event, 'overview')">Overview</button>
+  <button class="tab-button" onclick="openTab(event, 'gallery')">Gallery</button>
+  <button class="tab-button" onclick="openTab(event, 'documents')">Documents</button>
+</div>
+
+<!-- Overview Tab -->
+<div id="overview" class="tab-content active">
+  <p>This project involved drilling, tapping and inspecting threaded holes
+  within a mild steel block. Accurate hole positioning and thread verification
+  were performed using a thread plug gauge.</p>
+
+  <div class="project-specifications">
+    <h3>Project Specifications</h3>
+    <div class="spec-grid">
+      <div class="spec-item">
+        <span class="spec-title">Machine</span>
+        <span class="spec-value">Pillar Drill</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-title">Material</span>
+        <span class="spec-value">Mild Steel</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-title">Operations</span>
+        <span class="spec-value">Drilling, Tapping, Thread Gauging</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-title">Inspection</span>
+        <span class="spec-value">Thread Plug Gauge</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Engineering Drawing</h3>
+
+<img src="../images/dtg-drawing.jpg"
+alt="Drill, Hole and Thread Gauge Engineering Drawing"
+class="drawing-image">
+
+<!-- Gallery Tab -->
+<div id="gallery" class="tab-content">
+  <div class="gallery-grid">
+    <img src="../images/dtg1.jpg" class="gallery-img">
+  </div>
+</div>
+
+<!-- Documents Tab -->
+<div id="documents" class="tab-content">
+  <a class="hero-button" href="../reports/dtg-report.pdf" download>
+    Download Job Report (PDF)
+  </a>
+</div>
+
+<div class="project-nav-buttons">
+  <a class="prev-project" href="lathe-shaft.html">← Previous Project</a>
+  <a class="next-project" href="next-project.html">Next Project →</a>
+</div>
+
+</section>
+
+<!-- Lightbox HTML -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close" id="lightbox-close">×</span>
+  <img id="lightbox-img">
+  <span class="lightbox-prev" id="lightbox-prev">&#10094;</span>
+  <span class="lightbox-next" id="lightbox-next">&#10095;</span>
+</div>
+
+<!-- Scripts -->
+<script>
+function openTab(evt, tabName){
+  let tabs = document.getElementsByClassName("tab-content");
+  let buttons = document.getElementsByClassName("tab-button");
+
+  for(let i=0;i<tabs.length;i++) tabs[i].classList.remove("active");
+  for(let i=0;i<buttons.length;i++) buttons[i].classList.remove("active");
+
+  document.getElementById(tabName).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+
+// Lightbox
+let currentImageIndex = 0;
+let galleryImages = [];
+
+window.addEventListener('DOMContentLoaded', () => {
+  galleryImages = Array.from(document.querySelectorAll('#gallery .gallery-img'));
+
+  galleryImages.forEach((img,index) => {
+    img.addEventListener('click', () => openLightbox(index));
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev').addEventListener('click', () => changeLightbox(-1));
+  document.getElementById('lightbox-next').addEventListener('click', () => changeLightbox(1));
+});
+
+function openLightbox(index){
+  currentImageIndex = index;
+  document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
+  document.getElementById('lightbox').style.display = 'flex';
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+function changeLightbox(direction){
+  currentImageIndex += direction;
+  if(currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+  if(currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+  document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
+}
+
+document.addEventListener('keydown', function(e){
+  const lightbox = document.getElementById('lightbox');
+  if(lightbox.style.display === 'flex'){
+    if(e.key === 'ArrowLeft') changeLightbox(-1);
+    if(e.key === 'ArrowRight') changeLightbox(1);
+    if(e.key === 'Escape') closeLightbox();
+  }
+});
+</script>
+
+</body>
+</html>
