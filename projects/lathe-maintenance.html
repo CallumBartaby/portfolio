@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Centre Lathe Maintenance</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="../index.html#about">About</a>
+<a href="../index.html#skills">Skills</a>
+<a href="../index.html#projects">Projects</a>
+<a href="../index.html#contact">Contact</a>
+
+</nav>
+
+<section>
+
+<a class="hero-button" href="../index.html#projects">
+← Back to Projects
+</a>
+
+<header class="project-hero">
+
+<h1>Centre Lathe Maintenance</h1>
+<p>Workshop Maintenance | Machine Care | Safety</p>
+
+</header>
+
+
+<!-- Tabs -->
+
+<div class="tabs">
+
+<button class="tab-button active" onclick="openTab(event,'overview')">
+Overview
+</button>
+
+<button class="tab-button" onclick="openTab(event,'gallery')">
+Gallery
+</button>
+
+<button class="tab-button" onclick="openTab(event,'documents')">
+Documents
+</button>
+
+</div>
+
+
+<!-- Overview -->
+
+<div id="overview" class="tab-content active">
+
+<h2>Overview</h2>
+
+<p>
+This project involved carrying out routine maintenance on a centre lathe
+within the college workshop. The aim was to ensure the machine operated
+safely, accurately and reliably by inspecting critical components and
+performing cleaning and lubrication tasks.
+</p>
+
+<p>
+The maintenance process included removing swarf and debris, checking
+machine guards and controls, lubricating sliding surfaces and ensuring
+the lead screw, carriage and chuck were operating correctly.
+</p>
+
+<p>
+Routine maintenance is essential for extending machine life, maintaining
+precision and ensuring safe operation within a workshop environment.
+</p>
+
+
+<div class="project-specifications">
+
+<h3>Maintenance Tasks</h3>
+
+<div class="spec-grid">
+
+<div class="spec-item">
+<span class="spec-title">Machine</span>
+<span class="spec-value">Centre Lathe</span>
+</div>
+
+<div class="spec-item">
+<span class="spec-title">Tasks Performed</span>
+<span class="spec-value">Cleaning, Lubrication, Inspection</span>
+</div>
+
+<div class="spec-item">
+<span class="spec-title">Areas Checked</span>
+<span class="spec-value">Chuck, Lead Screw, Carriage</span>
+</div>
+
+<div class="spec-item">
+<span class="spec-title">Purpose</span>
+<span class="spec-value">Safety & Machine Reliability</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Gallery -->
+
+<div id="gallery" class="tab-content">
+
+<h2>Gallery</h2>
+
+<div class="gallery-grid">
+
+<img src="../images/LM1.jpg" class="gallery-img">
+<img src="../images/LM2.jpg" class="gallery-img">
+
+
+</div>
+
+</div>
+
+
+<!-- Documents -->
+
+<div id="documents" class="tab-content">
+
+<h2>Documents</h2>
+
+<a class="hero-button"
+href="../reports/lathe-maintenance-report.pdf"
+download>
+
+Download Maintenance Report (PDF)
+
+</a>
+
+</div>
+
+
+<!-- Project Navigation -->
+
+<div class="project-nav-buttons">
+
+<a class="prev-project" href="milling-machine.html">
+← Previous Project
+</a>
+
+<a class="next-project" href="#">
+Next Project →
+</a>
+
+</div>
+
+</section>
+
+
+<!-- Lightbox -->
+
+<div id="lightbox" class="lightbox">
+
+<span class="lightbox-close" id="lightbox-close">×</span>
+
+<img id="lightbox-img">
+
+<span class="lightbox-prev" id="lightbox-prev">&#10094;</span>
+<span class="lightbox-next" id="lightbox-next">&#10095;</span>
+
+</div>
+
+
+<script>
+
+function openTab(evt, tabName){
+
+let tabs = document.getElementsByClassName("tab-content");
+let buttons = document.getElementsByClassName("tab-button");
+
+for(let i=0;i<tabs.length;i++){
+tabs[i].classList.remove("active");
+}
+
+for(let i=0;i<buttons.length;i++){
+buttons[i].classList.remove("active");
+}
+
+document.getElementById(tabName).classList.add("active");
+evt.currentTarget.classList.add("active");
+
+}
+
+let currentImageIndex = 0;
+let galleryImages = [];
+
+window.addEventListener('DOMContentLoaded', () => {
+
+galleryImages = Array.from(document.querySelectorAll('#gallery .gallery-img'));
+
+galleryImages.forEach((img, index) => {
+img.addEventListener('click', () => openLightbox(index));
+});
+
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-prev').addEventListener('click', () => changeLightbox(-1));
+document.getElementById('lightbox-next').addEventListener('click', () => changeLightbox(1));
+
+});
+
+function openLightbox(index){
+
+currentImageIndex = index;
+document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
+document.getElementById('lightbox').style.display = 'flex';
+
+}
+
+function closeLightbox(){
+
+document.getElementById('lightbox').style.display = 'none';
+
+}
+
+function changeLightbox(direction){
+
+currentImageIndex += direction;
+
+if(currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+if(currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+
+document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
+
+}
+
+document.addEventListener('keydown', function(e) {
+
+const lightbox = document.getElementById('lightbox');
+
+if(lightbox.style.display === 'flex'){
+
+if(e.key === 'ArrowLeft'){
+changeLightbox(-1);
+}
+
+else if(e.key === 'ArrowRight'){
+changeLightbox(1);
+}
+
+else if(e.key === 'Escape'){
+closeLightbox();
+}
+
+}})
+</script>
+
+</body>
+
+</html>
